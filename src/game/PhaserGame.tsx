@@ -23,45 +23,41 @@ interface PhaserGameProps {
   onGadgetUsed?: (gadgetType: GadgetType) => void;
 }
 
-export const PhaserGame: React.FC<PhaserGameProps> = ({
-  onLootChange,
-  onAlarmChange,
-  onOpenLockpick,
-  onMissionEnd,
-  onTimerTick,
-  onGadgetUsed,
-}) => {
+export const PhaserGame: React.FC<PhaserGameProps> = (props) => {
   const gameRef = useRef<Phaser.Game | null>(null);
+  const propsRef = useRef(props);
 
   useEffect(() => {
-    // Prevent duplicate initialization in React strict mode
+    propsRef.current = props;
+  });
+
+  useEffect(() => {
     if (!gameRef.current) {
       gameRef.current = new Phaser.Game(GameConfig);
     }
 
-    // Bind event listeners
     const handleLoot = (data: { currentLoot: number; targetLoot: number }) => {
-      onLootChange?.(data.currentLoot, data.targetLoot);
+      propsRef.current.onLootChange?.(data.currentLoot, data.targetLoot);
     };
 
     const handleAlarm = (data: { level: AlarmLevel; alertsCount: number }) => {
-      onAlarmChange?.(data.level, data.alertsCount);
+      propsRef.current.onAlarmChange?.(data.level, data.alertsCount);
     };
 
     const handleLockpick = (data: { vaultId: string; difficulty: number }) => {
-      onOpenLockpick?.(data.vaultId, data.difficulty);
+      propsRef.current.onOpenLockpick?.(data.vaultId, data.difficulty);
     };
 
     const handleMissionEnd = (stats: MissionStats) => {
-      onMissionEnd?.(stats);
+      propsRef.current.onMissionEnd?.(stats);
     };
 
     const handleTimer = (data: { timeRemaining: number }) => {
-      onTimerTick?.(data.timeRemaining);
+      propsRef.current.onTimerTick?.(data.timeRemaining);
     };
 
     const handleGadget = (data: { gadgetType: GadgetType }) => {
-      onGadgetUsed?.(data.gadgetType);
+      propsRef.current.onGadgetUsed?.(data.gadgetType);
     };
 
     EventBus.on(EVENT_LOOT_UPDATED, handleLoot);
@@ -84,7 +80,7 @@ export const PhaserGame: React.FC<PhaserGameProps> = ({
         gameRef.current = null;
       }
     };
-  }, [onLootChange, onAlarmChange, onOpenLockpick, onMissionEnd, onTimerTick, onGadgetUsed]);
+  }, []);
 
   return (
     <div
