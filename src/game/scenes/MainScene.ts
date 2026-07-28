@@ -124,56 +124,24 @@ export class MainScene extends Phaser.Scene {
     );
     this.extractPad.setDepth(2);
 
-    // 4. Setup Loot Chests
+    // 4. Setup Player Thief
+    this.setupPlayer();
+
+    // 5. Setup Loot Chests
     this.setupChests();
 
-    // 5. Setup Master Vault
+    // 6. Setup Master Vault
     this.setupVault();
 
-    // 6. Setup Lasers
+    // 7. Setup Lasers
     this.setupLasers();
-
-    // 7. Setup Player Thief
-    this.setupPlayer();
 
     // 8. Setup Guard AI & CCTV Cameras
     this.setupGuards();
     this.setupCameras();
 
     // 9. Setup Collisions & Overlaps
-    this.physics.add.collider(this.player, this.wallsGroup);
-
-    this.physics.add.overlap(
-      this.player,
-      this.chestsGroup,
-      this.handleChestPickup as Phaser.Types.Physics.Arcade.ArcadePhysicsCallback,
-      undefined,
-      this
-    );
-
-    this.physics.add.overlap(
-      this.player,
-      this.vaultSprite,
-      this.handleVaultTouch as Phaser.Types.Physics.Arcade.ArcadePhysicsCallback,
-      undefined,
-      this
-    );
-
-    this.physics.add.overlap(
-      this.player,
-      this.extractPad,
-      this.handleExtractTouch as Phaser.Types.Physics.Arcade.ArcadePhysicsCallback,
-      undefined,
-      this
-    );
-
-    this.physics.add.overlap(
-      this.player,
-      this.lasersGroup,
-      this.handleLaserTouch as Phaser.Types.Physics.Arcade.ArcadePhysicsCallback,
-      undefined,
-      this
-    );
+    this.setupCollisions();
 
     // 10. Camera Setup
     this.cameras.main.setBounds(
@@ -260,6 +228,51 @@ export class MainScene extends Phaser.Scene {
     }
   }
 
+  private setupCollisions(): void {
+    if (this.player && this.wallsGroup) {
+      this.physics.add.collider(this.player, this.wallsGroup);
+    }
+    if (this.player && this.vaultSprite) {
+      this.physics.add.collider(this.player, this.vaultSprite);
+    }
+    if (this.player && this.chestsGroup) {
+      this.physics.add.overlap(
+        this.player,
+        this.chestsGroup,
+        this.handleChestPickup as Phaser.Types.Physics.Arcade.ArcadePhysicsCallback,
+        undefined,
+        this
+      );
+    }
+    if (this.player && this.vaultSprite) {
+      this.physics.add.overlap(
+        this.player,
+        this.vaultSprite,
+        this.handleVaultTouch as Phaser.Types.Physics.Arcade.ArcadePhysicsCallback,
+        undefined,
+        this
+      );
+    }
+    if (this.player && this.extractPad) {
+      this.physics.add.overlap(
+        this.player,
+        this.extractPad,
+        this.handleExtractTouch as Phaser.Types.Physics.Arcade.ArcadePhysicsCallback,
+        undefined,
+        this
+      );
+    }
+    if (this.player && this.lasersGroup) {
+      this.physics.add.overlap(
+        this.player,
+        this.lasersGroup,
+        this.handleLaserTouch as Phaser.Types.Physics.Arcade.ArcadePhysicsCallback,
+        undefined,
+        this
+      );
+    }
+  }
+
   private setupVault(): void {
     this.vaultSprite = this.physics.add.sprite(
       this.level.vault.x,
@@ -268,7 +281,6 @@ export class MainScene extends Phaser.Scene {
     );
     this.vaultSprite.setImmovable(true);
     this.vaultSprite.setDepth(4);
-    this.physics.add.collider(this.player, this.vaultSprite);
   }
 
   private setupLasers(): void {
