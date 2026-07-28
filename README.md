@@ -29,7 +29,7 @@
     ╚═╝  ╚═╝╚══════╝╚═╝╚══════╝   ╚═╝   
 ```
 
-**[🎮 PLAY LIVE DEMO ON GITHUB PAGES](https://dlinacre.github.io/pixel-heist/)** • **[📖 READ THE MASTER ARCHITECTURE DOCS](./docs/01-PRD.md)** • **[🏆 VIEW LEADERBOARDS](./docs/04-API-AND-INTERFACES.md)**
+**[🎮 PLAY LIVE DEMO ON GITHUB PAGES](https://dlinacre.github.io/pixel-heist/)** • **[📖 READ THE MASTER ARCHITECTURE DOCS](./docs/01-PRD.md)** • **[📋 VIEW 15-CATEGORY MASTER AUDIT (95/100)](./docs/audit-github-com/README.md)** • **[🏆 VIEW LEADERBOARDS](./docs/04-API-AND-INTERFACES.md)**
 
 </div>
 

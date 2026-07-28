@@ -1,0 +1,21 @@
+{
+  "name": "Pixel Heist — Tactical Stealth Infiltration Web Game",
+  "short_name": "Pixel Heist",
+  "description": "Tactical Stealth Infiltration Puzzle Game (Next.js 15 + Phaser 3 + TypeScript)",
+  "start_url": "/pixel-heist/",
+  "display": "standalone",
+  "background_color": "#0b0f14",
+  "theme_color": "#0b0f14",
+  "icons": [
+    {
+      "src": "/pixel-heist/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/pixel-heist/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

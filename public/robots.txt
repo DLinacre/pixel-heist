@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://dlinacre.github.io/pixel-heist/sitemap.xml
